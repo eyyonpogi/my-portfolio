@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aeron Jay Pesebre | BSIT Student & Full-Stack Developer</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        terminal: {
+                            green: '#10b981',
+                            cyan: '#06b6d4',
+                            purple: '#a855f7',
+                            dark: '#0a0f1d',
+                            darker: '#030712',
+                            panel: '#111827',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts & Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* Modern Glassmorphism & Neon Glows */
+        .glass-panel {
+            background: rgba(17, 24, 39, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+        }
+        .glow-emerald {
+            box-shadow: 0 0 20px -3px rgba(16, 185, 129, 0.25);
+        }
+        .glow-emerald:hover {
+            box-shadow: 0 0 30px 2px rgba(16, 185, 129, 0.4);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030712;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1f2937;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #10b981;
+        }
+    </style>
+</head>
+<body class="bg-terminal-darker text-slate-100 font-sans antialiased selection:bg-terminal-green selection:text-terminal-darker transition-colors duration-300 min-h-screen flex flex-col">
+
+    <!-- 1. NAVIGATION BAR -->
+    <nav class="fixed top-0 left-0 w-full z-50 glass-panel border-b border-slate-800/80 transition-all duration-300 py-3.5 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            
+            <!-- Logo / Brand with Small Avatar -->
+            <a href="#hero" class="text-lg font-bold font-mono tracking-tight text-terminal-green flex items-center space-x-3 hover:opacity-90 transition-opacity">
+                <img src="https://github.com/eyyonpogi.png" alt="Aeron Jay Pesebre" class="w-8 h-8 rounded-full border border-terminal-green/50 object-cover">
+                <span class="text-xs px-2 py-0.5 rounded bg-terminal-green/10 text-terminal-green border border-terminal-green/30">BSIT</span>
+                <span>aeronj</span>
+                <span class="animate-pulse text-terminal-green">_</span>
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="hidden md:flex items-center space-x-8 text-xs font-mono tracking-wider">
+                <a href="#about" class="text-slate-300 hover:text-terminal-green transition-colors"><span class="text-terminal-green font-bold">01.</span> About</a>
+                <a href="#techstack" class="text-slate-300 hover:text-terminal-green transition-colors"><span class="text-terminal-green font-bold">02.</span> Tech Stack</a>
+                <a href="#projects" class="text-slate-300 hover:text-terminal-green transition-colors"><span class="text-terminal-green font-bold">03.</span> Projects</a>
+                <a href="#goals" class="text-slate-300 hover:text-terminal-green transition-colors"><span class="text-terminal-green font-bold">04.</span> Roadmap</a>
+                <a href="#contact" class="text-slate-300 hover:text-terminal-green transition-colors"><span class="text-terminal-green font-bold">05.</span> Contact</a>
+            </div>
+
+            <!-- Social Icons & Mobile Menu Controls -->
+            <div class="flex items-center space-x-3">
+                <a href="https://github.com/eyyonpogi" target="_blank" rel="noopener noreferrer" class="p-2 text-slate-400 hover:text-terminal-green transition-colors" title="GitHub profile">
+                    <i class="fab fa-github text-lg"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/aeron-jay-pesebre-894693405/" target="_blank" rel="noopener noreferrer" class="p-2 text-slate-400 hover:text-terminal-cyan transition-colors" title="LinkedIn profile">
+                    <i class="fab fa-linkedin text-lg"></i>
+                </a>
+                <a href="mailto:aeronjaypesebre@gmail.com" class="p-2 text-slate-400 hover:text-terminal-purple transition-colors" title="Send Email">
+                    <i class="fas fa-envelope text-lg"></i>
+                </a>
+
+                <!-- Mobile Menu Toggle Button -->
+                <button id="mobileMenuBtn" class="md:hidden p-2 text-slate-300 hover:text-terminal-green focus:outline-none">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden px-4 pt-4 pb-6 mt-3 rounded-xl glass-panel border border-slate-800 flex flex-col space-y-3 font-mono text-sm">
+            <a href="#about" class="mobile-link text-slate-300 hover:text-terminal-green py-2 border-b border-slate-800"><span class="text-terminal-green">01.</span> About</a>
+            <a href="#techstack" class="mobile-link text-slate-300 hover:text-terminal-green py-2 border-b border-slate-800"><span class="text-terminal-green">02.</span> Tech Stack</a>
+            <a href="#projects" class="mobile-link text-slate-300 hover:text-terminal-green py-2 border-b border-slate-800"><span class="text-terminal-green">03.</span> Projects</a>
+            <a href="#goals" class="mobile-link text-slate-300 hover:text-terminal-green py-2 border-b border-slate-800"><span class="text-terminal-green">04.</span> Roadmap</a>
+            <a href="#contact" class="mobile-link text-slate-300 hover:text-terminal-green py-2"><span class="text-terminal-green">05.</span> Contact</a>
+        </div>
+    </nav>
+
+    <!-- MAIN BODY -->
+    <main class="flex-grow pt-24">
+
+        <!-- 2. HERO SECTION -->
+        <section id="hero" class="min-h-[85vh] flex items-center justify-center relative overflow-hidden py-16 px-6">
+            <!-- Background Glow Effects -->
+            <div class="absolute top-1/4 left-1/4 w-80 h-80 bg-terminal-green/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-terminal-cyan/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="max-w-5xl mx-auto text-center relative z-10">
+                <!-- Avatar / Profile Picture -->
+                <div class="relative inline-block mb-6">
+                    <img src="https://github.com/eyyonpogi.png" alt="Aeron Jay Pesebre" class="w-28 h-28 sm:w-36 sm:h-36 rounded-full border-2 border-terminal-green shadow-xl shadow-terminal-green/20 object-cover mx-auto">
+                    <span class="absolute bottom-1 right-1 w-5 h-5 rounded-full bg-terminal-green border-2 border-terminal-darker animate-pulse" title="Available for projects"></span>
+                </div>
+
+                <!-- Status Badge -->
+                <div class="block">
+                    <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-terminal-green/40 mb-8 text-xs font-mono text-terminal-green shadow-sm shadow-terminal-green/10">
+                        <span class="w-2 h-2 rounded-full bg-terminal-green animate-ping"></span>
+                        <span>Currently Studying BSIT at OLLCF</span>
+                    </div>
+                </div>
+
+                <!-- Primary Greeting Headline -->
+                <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight mb-6 leading-tight">
+                    Hi, I'm <span class="text-transparent bg-clip-text bg-gradient-to-r from-terminal-green via-emerald-300 to-terminal-cyan">Aeron Jay Pesebre</span> 
+                </h1>
+
+                <!-- Subtitle -->
+                <p class="text-lg sm:text-2xl font-mono text-slate-300 mb-6 max-w-3xl mx-auto font-medium">
+                    BSIT Student | Full-Stack Developer & Aspiring Cybersecurity Analyst
+                </p>
+
+                <!-- Intro Description -->
+                <p class="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed font-sans">
+                    Passionate about building scalable web architectures with full-stack technology, "vibecoding" clean user interfaces, providing solid IT support, and practicing security auditing with <span class="text-terminal-green font-mono font-semibold">Kali Linux</span>.
+                </p>
+
+                <!-- Tech Badges Ribbon -->
+                <div class="flex flex-wrap justify-center gap-2 mb-10 max-w-3xl mx-auto font-mono text-xs">
+                    <span class="px-3 py-1.5 rounded-lg bg-slate-900/80 border border-slate-800 text-slate-300 flex items-center space-x-1.5"><i class="fab fa-node-js text-emerald-400"></i><span>Node.js</span></span>
+                    <span class="px-3 py-1.5 rounded-lg bg-slate-900/80 border border-slate-800 text-slate-300 flex items-center space-x-1.5"><i class="fab fa-python text-blue-400"></i><span>Python</span></span>
+                    <span class="px-3 py-1.5 rounded-lg bg-slate-900/80 border border-slate-800 text-slate-300 flex items-center space-x-1.5"><i class="fas fa-code text-indigo-400"></i><span>C++</span></span>
+                    <span class="px-3 py-1.5 rounded-lg bg-slate-900/80 border border-slate-800 text-slate-300 flex items-center space-x-1.5"><i class="fas fa-database text-cyan-400"></i><span>PostgreSQL</span></span>
+                    <span class="px-3 py-1.5 rounded-lg bg-slate-900/80 border border-slate-800 text-slate-300 flex items-center space-x-1.5"><i class="fab fa-css3-alt text-sky-400"></i><span>Tailwind CSS</span></span>
+                    <span class="px-3 py-1.5 rounded-lg bg-slate-900/80 border border-slate-800 text-slate-300 flex items-center space-x-1.5"><i class="fab fa-js text-yellow-400"></i><span>JavaScript</span></span>
+                    <span class="px-3 py-1.5 rounded-lg bg-slate-900/80 border border-terminal-green/50 text-terminal-green flex items-center space-x-1.5 bg-terminal-green/5"><i class="fab fa-linux text-terminal-green"></i><span>Kali Linux</span></span>
+                </div>
+
+                <!-- Call To Action Buttons -->
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <a href="#projects" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-gradient-to-r from-terminal-green to-emerald-600 text-slate-950 font-bold font-mono text-sm glow-emerald transition-all duration-300 transform hover:-translate-y-0.5 flex items-center justify-center space-x-2">
+                        <span>View Projects</span>
+                        <i class="fas fa-code-branch text-xs"></i>
+                    </a>
+                    <a href="#contact" class="w-full sm:w-auto px-8 py-3.5 rounded-xl glass-panel hover:bg-slate-800/80 text-slate-200 font-mono text-sm border border-slate-700 transition-all flex items-center justify-center space-x-2">
+                        <span>Get In Touch</span>
+                        <i class="fas fa-terminal text-xs text-terminal-green"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. ABOUT SECTION -->
+        <section id="about" class="py-20 px-6 max-w-6xl mx-auto">
+            <div class="flex flex-col items-center mb-12">
+                <h2 class="text-xs font-mono uppercase tracking-widest text-terminal-green mb-2">01. Background & Vision</h2>
+                <h3 class="text-3xl font-extrabold">About Me</h3>
+                <div class="w-12 h-1 bg-terminal-green rounded-full mt-3"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                <!-- Terminal Shell Preview Card -->
+                <div class="lg:col-span-5">
+                    <div class="glass-panel rounded-2xl overflow-hidden border border-slate-800 shadow-xl font-mono text-xs">
+                        <div class="bg-slate-900 px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
+                                <span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
+                                <span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span>
+                            </div>
+                            <span class="text-slate-500 font-mono">aeron@kali-laptop:~</span>
+                        </div>
+                        <div class="p-5 space-y-3 bg-slate-950/90 text-slate-300">
+                            <p><span class="text-terminal-green">user@aeron:~$</span> whoami</p>
+                            <p class="text-slate-400 pl-4">Aeron Jay Pesebre — BSIT Student & Tech Enthusiast</p>
+                            
+                            <p><span class="text-terminal-green">user@aeron:~$</span> cat focus.json</p>
+                            <div class="pl-4 text-emerald-400/90 leading-relaxed">
+                                {<br>
+                                &nbsp;&nbsp;"degree": "Bachelor of Science in Information Technology",<br>
+                                &nbsp;&nbsp;"role": "Aspiring Full Stack & Cybersecurity Support",<br>
+                                &nbsp;&nbsp;"style": "Vibecoding & Continuous Learning",<br>
+                                &nbsp;&nbsp;"os_lab": "Kali Linux Security Environment"<br>
+                                }
+                            </div>
+                            <p><span class="text-terminal-green">user@aeron:~$</span> <span class="animate-pulse">_</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Description Text -->
+                <div class="lg:col-span-7 space-y-6 text-slate-300 leading-relaxed font-sans">
+                    <p class="text-base sm:text-lg">
+                        I am currently an <span class="text-white font-semibold">Information Technology (BSIT)</span> student with a strong drive for building complete web solutions and learning practical systems administration.
+                    </p>
+                    <p>
+                        My coding journey revolves around <span class="text-terminal-green font-mono">vibecoding</span>—immersing myself in modern full-stack web architectures, designing intuitive frontend interfaces, and establishing structured PostgreSQL databases. 
+                    </p>
+                    <p>
+                        Beyond traditional web application development, I am actively practicing ethical security auditing, CLI command usage, and penetration testing fundamentals in <span class="text-white font-semibold">Kali Linux</span>. My dual goal is to become an effective Full-Stack Developer and provide dependable IT Support & Infrastructure defense.
+                    </p>
+
+                    <!-- Key Aspirations Cards -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 text-xs font-mono">
+                        <div class="p-4 rounded-xl glass-panel border border-slate-800 hover:border-terminal-green/50 transition-colors">
+                            <i class="fas fa-layer-group text-lg text-terminal-green mb-2 block"></i>
+                            <h4 class="font-bold text-white mb-1">Full-Stack Dev</h4>
+                            <p class="text-slate-400 text-[11px]">Building end-to-end applications with modern stacks.</p>
+                        </div>
+                        <div class="p-4 rounded-xl glass-panel border border-slate-800 hover:border-terminal-cyan/50 transition-colors">
+                            <i class="fab fa-linux text-lg text-terminal-cyan mb-2 block"></i>
+                            <h4 class="font-bold text-white mb-1">Kali & Security</h4>
+                            <p class="text-slate-400 text-[11px]">Practicing network auditing & security basics.</p>
+                        </div>
+                        <div class="p-4 rounded-xl glass-panel border border-slate-800 hover:border-terminal-purple/50 transition-colors">
+                            <i class="fas fa-headset text-lg text-terminal-purple mb-2 block"></i>
+                            <h4 class="font-bold text-white mb-1">IT Support</h4>
+                            <p class="text-slate-400 text-[11px]">Hardware, software, and network troubleshooting.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. TECH STACK SECTION -->
+        <section id="techstack" class="py-20 px-6 max-w-6xl mx-auto">
+            <div class="flex flex-col items-center mb-12">
+                <h2 class="text-xs font-mono uppercase tracking-widest text-terminal-green mb-2">02. Skills & Capabilities</h2>
+                <h3 class="text-3xl font-extrabold">Tech Stack & Tools</h3>
+                <div class="w-12 h-1 bg-terminal-green rounded-full mt-3"></div>
+            </div>
+
+            <!-- Tech Filter Tabs -->
+            <div class="flex justify-center flex-wrap gap-2 mb-10 font-mono text-xs">
+                <button class="tech-tab active px-4 py-2 rounded-xl transition-all bg-terminal-green/20 text-terminal-green border border-terminal-green/50" data-cat="all">All Skills</button>
+                <button class="tech-tab px-4 py-2 rounded-xl transition-all bg-slate-900/60 text-slate-400 border border-slate-800 hover:text-white" data-cat="languages">Languages & Core</button>
+                <button class="tech-tab px-4 py-2 rounded-xl transition-all bg-slate-900/60 text-slate-400 border border-slate-800 hover:text-white" data-cat="backend">Backend & DB</button>
+                <button class="tech-tab px-4 py-2 rounded-xl transition-all bg-slate-900/60 text-slate-400 border border-slate-800 hover:text-white" data-cat="security">Security & Systems</button>
+                <button class="tech-tab px-4 py-2 rounded-xl transition-all bg-slate-900/60 text-slate-400 border border-slate-800 hover:text-white" data-cat="styling">Styling & Web</button>
+            </div>
+
+            <!-- Tech Cards Grid -->
+            <div id="techGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                
+                <!-- Item 1: Node.js -->
+                <div class="tech-card glass-panel p-4 rounded-xl border border-slate-800 hover:border-terminal-green/50 transition-all hover:-translate-y-1 group" data-cat="backend">
+                    <div class="flex items-center space-x-3">
+                        <i class="fab fa-node-js text-3xl text-emerald-500 group-hover:scale-110 transition-transform"></i>
+                        <div>
+                            <h4 class="font-bold text-sm">Node.js</h4>
+                            <span class="text-xs text-slate-400 font-mono">Backend Runtime</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 2: Python -->
+                <div class="tech-card glass-panel p-4 rounded-xl border border-slate-800 hover:border-terminal-green/50 transition-all hover:-translate-y-1 group" data-cat="languages">
+                    <div class="flex items-center space-x-3">
+                        <i class="fab fa-python text-3xl text-blue-400 group-hover:scale-110 transition-transform"></i>
+                        <div>
+                            <h4 class="font-bold text-sm">Python</h4>
+                            <span class="text-xs text-slate-400 font-mono">Core Language</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 3: C++ -->
+                <div class="tech-card glass-panel p-4 rounded-xl border border-slate-800 hover:border-terminal-green/50 transition-all hover:-translate-y-1 group" data-cat="languages">
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-code text-3xl text-indigo-400 group-hover:scale-110 transition-transform"></i>
+                        <div>
+                            <h4 class="font-bold text-sm">C++</h4>
+                            <span class="text-xs text-slate-400 font-mono">Core Programming</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 4: PostgreSQL -->
+                <div class="tech-card glass-panel p-4 rounded-xl border border-slate-800 hover:border-terminal-green/50 transition-all hover:-translate-y-1 group" data-cat="backend">
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-database text-3xl text-cyan-400 group-hover:scale-110 transition-transform"></i>
+                        <div>
+                            <h4 class="font-bold text-sm">PostgreSQL</h4>
+                            <span class="text-xs text-slate-400 font-mono">Relational DB</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 5: Kali Linux -->
+                <div class="tech-card glass-panel p-4 rounded-xl border border-terminal-green/40 hover:border-terminal-green transition-all hover:-translate-y-1 group bg-terminal-green/5" data-cat="security">
+                    <div class="flex items-center space-x-3">
+                        <i class="fab fa-linux text-3xl text-terminal-green group-hover:scale-110 transition-transform"></i>
+                        <div>
+                            <h4 class="font-bold text-sm text-terminal-green">Kali Linux</h4>
+                            <span class="text-xs text-slate-400 font-mono">PenTesting & CLI</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 6: IT Support -->
+                <div class="tech-card glass-panel p-4 rounded-xl border border-slate-800 hover:border-terminal-green/50 transition-all hover:-translate-y-1 group" data-cat="security">
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-tools text-3xl text-purple-400 group-hover:scale-110 transition-transform"></i>
+                        <div>
+                            <h4 class="font-bold text-sm">IT Support</h4>
+                            <span class="text-xs text-slate-400 font-mono">Hardware & Network</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 7: JavaScript -->
+                <div class="tech-card glass-panel p-4 rounded-xl border border-slate-800 hover:border-terminal-green/50 transition-all hover:-translate-y-1 group" data-cat="languages">
+                    <div class="flex items-center space-x-3">
+                        <i class="fab fa-js text-3xl text-yellow-400 group-hover:scale-110 transition-transform"></i>
+                        <div>
+                            <h4 class="font-bold text-sm">JavaScript</h4>
+                            <span class="text-xs text-slate-400 font-mono">Frontend / ES6+</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 8: Tailwind CSS -->
+                <div class="tech-card glass-panel p-4 rounded-xl border border-slate-800 hover:border-terminal-green/50 transition-all hover:-translate-y-1 group" data-cat="styling">
+                    <div class="flex items-center space-x-3">
+                        <i class="fab fa-css3-alt text-3xl text-sky-400 group-hover:scale-110 transition-transform"></i>
+                        <div>
+                            <h4 class="font-bold text-sm">Tailwind CSS</h4>
+                            <span class="text-xs text-slate-400 font-mono">Styling Framework</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 9: HTML5 / CSS3 -->
+                <div class="tech-card glass-panel p-4 rounded-xl border border-slate-800 hover:border-terminal-green/50 transition-all hover:-translate-y-1 group" data-cat="styling">
+                    <div class="flex items-center space-x-3">
+                        <i class="fab fa-html5 text-3xl text-orange-500 group-hover:scale-110 transition-transform"></i>
+                        <div>
+                            <h4 class="font-bold text-sm">HTML5 & CSS3</h4>
+                            <span class="text-xs text-slate-400 font-mono">Web Structure</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 10: PHP & Laravel -->
+                <div class="tech-card glass-panel p-4 rounded-xl border border-slate-800 hover:border-terminal-green/50 transition-all hover:-translate-y-1 group" data-cat="backend">
+                    <div class="flex items-center space-x-3">
+                        <i class="fab fa-laravel text-3xl text-red-500 group-hover:scale-110 transition-transform"></i>
+                        <div>
+                            <h4 class="font-bold text-sm">PHP / Laravel</h4>
+                            <span class="text-xs text-slate-400 font-mono">Web Framework</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 11: Git / GitHub -->
+                <div class="tech-card glass-panel p-4 rounded-xl border border-slate-800 hover:border-terminal-green/50 transition-all hover:-translate-y-1 group" data-cat="security">
+                    <div class="flex items-center space-x-3">
+                        <i class="fab fa-git-alt text-3xl text-orange-400 group-hover:scale-110 transition-transform"></i>
+                        <div>
+                            <h4 class="font-bold text-sm">Git & GitHub</h4>
+                            <span class="text-xs text-slate-400 font-mono">Version Control</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 12: Express.js -->
+                <div class="tech-card glass-panel p-4 rounded-xl border border-slate-800 hover:border-terminal-green/50 transition-all hover:-translate-y-1 group" data-cat="backend">
+                    <div class="flex items-center space-x-3">
+                        <i class="fas fa-server text-3xl text-slate-400 group-hover:scale-110 transition-transform"></i>
+                        <div>
+                            <h4 class="font-bold text-sm">Express.js</h4>
+                            <span class="text-xs text-slate-400 font-mono">Node Backend</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 5. FEATURED PROJECTS SECTION -->
+        <section id="projects" class="py-20 px-6 max-w-6xl mx-auto">
+            <div class="flex flex-col items-center mb-12">
+                <h2 class="text-xs font-mono uppercase tracking-widest text-terminal-green mb-2">03. Portfolio Highlights</h2>
+                <h3 class="text-3xl font-extrabold">Featured Projects</h3>
+                <div class="w-12 h-1 bg-terminal-green rounded-full mt-3"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                <!-- Project 1: CollabNet -->
+                <div class="glass-panel rounded-2xl overflow-hidden border border-slate-800 hover:border-terminal-green/50 transition-all duration-300 flex flex-col justify-between group">
+                    <div class="p-6 sm:p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-xs font-mono px-3 py-1 rounded-full bg-terminal-green/10 text-terminal-green border border-terminal-green/30">Capstone Project</span>
+                            <div class="flex space-x-3 text-slate-400">
+                                <a href="https://github.com/eyyonpogi" target="_blank" class="hover:text-terminal-green transition-colors" title="Source Repository"><i class="fab fa-github text-lg"></i></a>
+                            </div>
+                        </div>
+
+                        <h4 class="text-2xl font-bold mb-3 text-white group-hover:text-terminal-green transition-colors">CollabNet</h4>
+                        
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                            A comprehensive web-based community extension service and partnership management system designed to streamline institutional collaborations, project tracking, and reporting.
+                        </p>
+
+                        <div class="flex flex-wrap gap-2 font-mono text-xs text-emerald-400">
+                            <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800">Node.js</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800">PostgreSQL</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800">Tailwind CSS</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800">JavaScript</span>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4 bg-slate-950/60 border-t border-slate-800/80 text-xs font-mono text-slate-400 flex items-center justify-between">
+                        <span>Status: Fully Built Capstone</span>
+                        <i class="fas fa-check-circle text-terminal-green"></i>
+                    </div>
+                </div>
+
+                <!-- Project 2: Crave To Go Ordering System -->
+                <div class="glass-panel rounded-2xl overflow-hidden border border-slate-800 hover:border-terminal-green/50 transition-all duration-300 flex flex-col justify-between group">
+                    <div class="p-6 sm:p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-xs font-mono px-3 py-1 rounded-full bg-terminal-cyan/10 text-terminal-cyan border border-terminal-cyan/30">Web App</span>
+                            <div class="flex space-x-3 text-slate-400">
+                                <a href="https://github.com/eyyonpogi" target="_blank" class="hover:text-terminal-cyan transition-colors" title="Source Repository"><i class="fab fa-github text-lg"></i></a>
+                            </div>
+                        </div>
+
+                        <h4 class="text-2xl font-bold mb-3 text-white group-hover:text-terminal-cyan transition-colors">Crave To Go Ordering System</h4>
+                        
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                            An intuitive online student food ordering platform featuring interactive menu browsing, real-time cart handling, and streamlined order fulfillment.
+                        </p>
+
+                        <div class="flex flex-wrap gap-2 font-mono text-xs text-terminal-cyan">
+                            <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800">JavaScript</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800">Node.js</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800">HTML5</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800">CSS3</span>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4 bg-slate-950/60 border-t border-slate-800/80 text-xs font-mono text-slate-400 flex items-center justify-between">
+                        <span>Status: Completed</span>
+                        <i class="fas fa-utensils text-terminal-cyan"></i>
+                    </div>
+                </div>
+
+                <!-- Project 3: DormGrid -->
+                <div class="glass-panel rounded-2xl overflow-hidden border border-slate-800 hover:border-terminal-green/50 transition-all duration-300 flex flex-col justify-between group">
+                    <div class="p-6 sm:p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-xs font-mono px-3 py-1 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/30">Property Platform</span>
+                            <div class="flex space-x-3 text-slate-400">
+                                <a href="https://github.com/eyyonpogi" target="_blank" class="hover:text-purple-400 transition-colors" title="Source Repository"><i class="fab fa-github text-lg"></i></a>
+                            </div>
+                        </div>
+
+                        <h4 class="text-2xl font-bold mb-3 text-white group-hover:text-purple-400 transition-colors">DormGrid</h4>
+                        
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                            A smart web marketplace for room and property management, enabling landlords to showcase listings and tenants to search and reserve local dormitories effortlessly.
+                        </p>
+
+                        <div class="flex flex-wrap gap-2 font-mono text-xs text-purple-400">
+                            <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800">Node.js</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800">Express</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800">PostgreSQL</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800">Tailwind CSS</span>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4 bg-slate-950/60 border-t border-slate-800/80 text-xs font-mono text-slate-400 flex items-center justify-between">
+                        <span>Status: Active</span>
+                        <i class="fas fa-building text-purple-400"></i>
+                    </div>
+                </div>
+
+                <!-- Project 4: Laravel E-Commerce Website -->
+                <div class="glass-panel rounded-2xl overflow-hidden border border-slate-800 hover:border-terminal-green/50 transition-all duration-300 flex flex-col justify-between group">
+                    <div class="p-6 sm:p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-xs font-mono px-3 py-1 rounded-full bg-red-500/10 text-red-400 border border-red-500/30">E-Commerce</span>
+                            <div class="flex space-x-3 text-slate-400">
+                                <a href="https://github.com/eyyonpogi" target="_blank" class="hover:text-red-400 transition-colors" title="Source Repository"><i class="fab fa-github text-lg"></i></a>
+                            </div>
+                        </div>
+
+                        <h4 class="text-2xl font-bold mb-3 text-white group-hover:text-red-400 transition-colors">Laravel E-Commerce Website</h4>
+                        
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                            A feature-rich online shopping portal tailored for small business owners, incorporating inventory control, product catalogs, and order management.
+                        </p>
+
+                        <div class="flex flex-wrap gap-2 font-mono text-xs text-red-400">
+                            <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800">PHP</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800">Laravel</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800">PostgreSQL</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800">Tailwind CSS</span>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4 bg-slate-950/60 border-t border-slate-800/80 text-xs font-mono text-slate-400 flex items-center justify-between">
+                        <span>Status: Completed</span>
+                        <i class="fas fa-shopping-cart text-red-400"></i>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 6. ROADMAP & ASPIRATIONS SECTION -->
+        <section id="goals" class="py-20 px-6 max-w-5xl mx-auto">
+            <div class="flex flex-col items-center mb-12">
+                <h2 class="text-xs font-mono uppercase tracking-widest text-terminal-green mb-2">04. Growth Plan</h2>
+                <h3 class="text-3xl font-extrabold">Aspirations & Roadmap</h3>
+                <div class="w-12 h-1 bg-terminal-green rounded-full mt-3"></div>
+            </div>
+
+            <!-- Terminal Roadmap Box -->
+            <div class="glass-panel rounded-2xl overflow-hidden border border-slate-800 font-mono">
+                <!-- Top Window Header -->
+                <div class="bg-slate-900 px-6 py-3 border-b border-slate-800 flex items-center justify-between">
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                        <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+                        <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                    </div>
+                    <span class="text-xs text-slate-400">./future_roadmap.sh</span>
+                    <span class="text-xs text-terminal-green">BASH</span>
+                </div>
+
+                <!-- Terminal Content -->
+                <div class="p-6 sm:p-8 bg-slate-950/95 space-y-6">
+                    <div class="flex items-start space-x-3">
+                        <span class="text-terminal-green font-bold text-lg">🟢</span>
+                        <div>
+                            <h4 class="text-base font-bold text-white mb-1">1. Full Stack Mastery</h4>
+                            <p class="text-slate-300 text-xs sm:text-sm font-sans leading-relaxed">
+                                Crafting high-performance web applications with modern frontend frameworks, clean UI design, robust RESTful APIs, and optimized database design.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-3 border-t border-slate-900 pt-6">
+                        <span class="text-terminal-green font-bold text-lg">🟢</span>
+                        <div>
+                            <h4 class="text-base font-bold text-white mb-1">2. Kali Linux & Cybersecurity Audit</h4>
+                            <p class="text-slate-300 text-xs sm:text-sm font-sans leading-relaxed">
+                                Deep-diving into security testing tools, penetration techniques, network auditing, and practicing hands-on Linux security workflows.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-3 border-t border-slate-900 pt-6">
+                        <span class="text-terminal-green font-bold text-lg">🟢</span>
+                        <div>
+                            <h4 class="text-base font-bold text-white mb-1">3. IT Support & Infrastructure</h4>
+                            <p class="text-slate-300 text-xs sm:text-sm font-sans leading-relaxed">
+                                Delivering reliable system maintenance, user hardware/software troubleshooting, network routing, and overall IT operations excellence.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. CONTACT SECTION -->
+        <section id="contact" class="py-20 px-6 max-w-4xl mx-auto">
+            <div class="flex flex-col items-center mb-12">
+                <h2 class="text-xs font-mono uppercase tracking-widest text-terminal-green mb-2">05. Connect</h2>
+                <h3 class="text-3xl font-extrabold">Get In Touch</h3>
+                <div class="w-12 h-1 bg-terminal-green rounded-full mt-3"></div>
+            </div>
+
+            <!-- Quick Info Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10 font-mono text-xs">
+                
+                <!-- Email Click/Copy Card -->
+                <div class="p-4 rounded-xl glass-panel border border-slate-800 flex flex-col justify-between">
+                    <div>
+                        <i class="fas fa-envelope text-terminal-green text-xl mb-2"></i>
+                        <h5 class="font-bold text-white">Email</h5>
+                        <p class="text-slate-400 truncate text-[11px]" id="emailText">aeronjaypesebre@gmail.com</p>
+                    </div>
+                    <button id="copyEmailBtn" class="mt-3 text-left text-terminal-green hover:underline flex items-center space-x-1">
+                        <i class="far fa-copy"></i>
+                        <span id="copyBtnText">Copy Email</span>
+                    </button>
+                </div>
+
+                <!-- GitHub Card -->
+                <a href="https://github.com/eyyonpogi" target="_blank" rel="noopener noreferrer" class="p-4 rounded-xl glass-panel border border-slate-800 hover:border-terminal-green/40 transition-colors flex flex-col justify-between group">
+                    <div>
+                        <i class="fab fa-github text-white text-xl mb-2 group-hover:text-terminal-green transition-colors"></i>
+                        <h5 class="font-bold text-white">GitHub Profile</h5>
+                        <p class="text-slate-400 text-[11px]">github.com/eyyonpogi</p>
+                    </div>
+                    <span class="mt-3 text-terminal-green group-hover:underline flex items-center space-x-1">
+                        <span>Visit Profile</span>
+                        <i class="fas fa-arrow-right text-[10px]"></i>
+                    </span>
+                </a>
+
+                <!-- LinkedIn Card -->
+                <a href="https://www.linkedin.com/in/aeron-jay-pesebre-894693405/" target="_blank" rel="noopener noreferrer" class="p-4 rounded-xl glass-panel border border-slate-800 hover:border-terminal-cyan/40 transition-colors flex flex-col justify-between group">
+                    <div>
+                        <i class="fab fa-linkedin text-cyan-400 text-xl mb-2"></i>
+                        <h5 class="font-bold text-white">LinkedIn</h5>
+                        <p class="text-slate-400 truncate text-[11px]">Aeron Jay Pesebre</p>
+                    </div>
+                    <span class="mt-3 text-terminal-cyan group-hover:underline flex items-center space-x-1">
+                        <span>Connect</span>
+                        <i class="fas fa-arrow-right text-[10px]"></i>
+                    </span>
+                </a>
+
+            </div>
+
+            <!-- Message Form Panel with Direct Formspree Integration -->
+            <div class="glass-panel p-8 rounded-2xl border border-slate-800 relative">
+                
+                <!-- Dynamic Alert Banner -->
+                <div id="formAlert" class="hidden mb-6 p-4 rounded-xl bg-terminal-green/10 border border-terminal-green/30 text-terminal-green text-xs font-mono flex items-center space-x-3">
+                    <i class="fas fa-check-circle text-lg"></i>
+                    <span>Message sent successfully! Aeron Jay will get back to you soon.</span>
+                </div>
+
+                <form id="contactForm" action="https://formspree.io/f/xqppbnno" method="POST" class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-mono text-slate-400 mb-2">Your Name</label>
+                            <input type="text" name="name" required placeholder="Alex Mercer" class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-800 focus:border-terminal-green focus:outline-none text-slate-200 text-sm transition-colors font-sans">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-mono text-slate-400 mb-2">Your Email</label>
+                            <input type="email" name="email" required placeholder="alex@example.com" class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-800 focus:border-terminal-green focus:outline-none text-slate-200 text-sm transition-colors font-sans">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-mono text-slate-400 mb-2">Subject</label>
+                        <input type="text" name="subject" required placeholder="Full-Stack / IT Opportunity" class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-800 focus:border-terminal-green focus:outline-none text-slate-200 text-sm transition-colors font-sans">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-mono text-slate-400 mb-2">Message</label>
+                        <textarea name="message" rows="4" required placeholder="Hi Aeron, I saw your portfolio projects..." class="w-full px-4 py-3 rounded-xl bg-slate-900/90 border border-slate-800 focus:border-terminal-green focus:outline-none text-slate-200 text-sm transition-colors resize-none font-sans"></textarea>
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-terminal-green to-emerald-600 text-slate-950 font-bold font-mono text-sm glow-emerald hover:opacity-95 transition-all">
+                        Send Message <i class="fas fa-paper-plane ml-2"></i>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="py-8 border-t border-slate-900 text-center text-slate-500 text-xs font-mono relative">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+            <p>&copy; <span id="year"></span> Aeron Jay Pesebre. All rights reserved.</p>
+            <a href="#hero" class="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-terminal-green transition-colors" title="Back to Top">
+                <i class="fas fa-arrow-up"></i>
+            </a>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE SCRIPT LOGIC -->
+    <script>
+        // Set dynamic current year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // 1. Mobile Navigation Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // 2. Tech Filter Tabs Logic
+        const techTabs = document.querySelectorAll('.tech-tab');
+        const techCards = document.querySelectorAll('.tech-card');
+
+        techTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                techTabs.forEach(t => {
+                    t.classList.remove('active', 'bg-terminal-green/20', 'text-terminal-green', 'border-terminal-green/50');
+                    t.classList.add('bg-slate-900/60', 'text-slate-400', 'border-slate-800');
+                });
+
+                tab.classList.add('active', 'bg-terminal-green/20', 'text-terminal-green', 'border-terminal-green/50');
+                tab.classList.remove('bg-slate-900/60', 'text-slate-400', 'border-slate-800');
+
+                const targetCategory = tab.getAttribute('data-cat');
+
+                techCards.forEach(card => {
+                    if (targetCategory === 'all' || card.getAttribute('data-cat') === targetCategory) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // 3. Copy Email to Clipboard Helper
+        const copyEmailBtn = document.getElementById('copyEmailBtn');
+        const copyBtnText = document.getElementById('copyBtnText');
+
+        copyEmailBtn.addEventListener('click', () => {
+            const email = "aeronjaypesebre@gmail.com";
+            
+            const tempInput = document.createElement('textarea');
+            tempInput.value = email;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            copyBtnText.textContent = "Copied!";
+            setTimeout(() => {
+                copyBtnText.textContent = "Copy Email";
+            }, 2500);
+        });
+
+        // 4. Formspree AJAX Email Dispatcher
+        const contactForm = document.getElementById('contactForm');
+        const formAlert = document.getElementById('formAlert');
+        const submitBtn = document.getElementById('submitBtn');
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            submitBtn.disabled = true;
+            submitBtn.innerText = "Sending...";
+
+            const formData = new FormData(contactForm);
+
+            try {
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    formAlert.classList.remove('hidden');
+                    contactForm.reset();
+                    setTimeout(() => {
+                        formAlert.classList.add('hidden');
+                    }, 6000);
+                } else {
+                    alert("Unable to send email right now. Please try again or reach out directly at aeronjaypesebre@gmail.com.");
+                }
+            } catch (error) {
+                alert("Network error. Please check your connection and try again.");
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Send Message <i class="fas fa-paper-plane ml-2"></i>';
+            }
+        });
+    </script>
+</body>
+</html>
